@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Table, Button, Divider } from 'semantic-ui-react';
+import { Table, Button, Divider, Dimmer, Loader } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { fixKey } from '../utils/nameHelpers';
 
@@ -48,59 +48,66 @@ class Beer extends React.Component {
     } = this.state.beer
     return (
       <div>
-        <Divider hidden />
-        <Table definition>
-          <Table.Header>
-            <Table.Row>
-              <Table.Cell></Table.Cell>
-              <Table.HeaderCell textAlign="center">
-                { name }
-              </Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            <Table.Row>
-              <Table.Cell>Description</Table.Cell>
-              <Table.Cell>{description}</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>ABV</Table.Cell>
-              <Table.Cell>{abv}</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>Glass</Table.Cell>
-              <Table.Cell>{glassType}</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>Organic?</Table.Cell>
-              <Table.Cell>{is_organic === 'N' ? 'No' : 'Yes' }</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>Status</Table.Cell>
-              <Table.Cell>{status_display}</Table.Cell>
-            </Table.Row>
-          </Table.Body>
-        </Table>
-        <Table definition>
-          <Table.Header>
-            <Table.Row>
-              <Table.Cell></Table.Cell>
-              <Table.HeaderCell textAlign="center">
-                Style
-              </Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            <Table.Row>
-              <Table.Cell>Name</Table.Cell>
-              <Table.Cell>{styleName}</Table.Cell>
-            </Table.Row>
-            { this.styleRows(styles) }
-          </Table.Body>
-        </Table>
-        <Button basic color='blue' size="massive" fluid>
-          <Link to="/beers">See All Beers</Link>
-        </Button>
+        { name ?
+          <div>
+            <Divider hidden />
+            <Table definition>
+              <Table.Header>
+                <Table.Row>
+                  <Table.Cell></Table.Cell>
+                  <Table.HeaderCell textAlign="center" id='beer_header'>
+                    { name }
+                  </Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                <Table.Row>
+                  <Table.Cell>Description</Table.Cell>
+                  <Table.Cell>{description}</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell>ABV</Table.Cell>
+                  <Table.Cell>{abv}</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell>Glass</Table.Cell>
+                  <Table.Cell>{glassType}</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell>Organic?</Table.Cell>
+                  <Table.Cell>{is_organic === 'N' ? 'No' : 'Yes' }</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell>Status</Table.Cell>
+                  <Table.Cell>{status_display}</Table.Cell>
+                </Table.Row>
+              </Table.Body>
+            </Table>
+            <Table definition>
+              <Table.Header>
+                <Table.Row>
+                  <Table.Cell></Table.Cell>
+                  <Table.HeaderCell textAlign="center">
+                    Style
+                  </Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                <Table.Row>
+                  <Table.Cell>Name</Table.Cell>
+                  <Table.Cell>{styleName}</Table.Cell>
+                </Table.Row>
+                { this.styleRows(styles) }
+              </Table.Body>
+            </Table>
+            <Button basic color='blue' size="massive" fluid>
+              <Link to="/beers">See All Beers</Link>
+            </Button>
+          </div> :
+          <Dimmer active>
+            <Loader />
+          </Dimmer>
+        }
       </div>
     )
   }

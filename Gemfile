@@ -10,6 +10,12 @@ gem 'foreman', '~> 0.84.0'
 group :development, :test do
   gem 'pry', '~> 0.10.4'
   gem 'dotenv-rails', '~> 2.2.1'
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'selenium-webdriver'
+  gem 'capybara'
 end
 
 group :development do

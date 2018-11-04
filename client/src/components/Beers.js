@@ -62,7 +62,7 @@ class Beers extends React.Component {
               <Loader />
             </Dimmer>
           </Segment> :
-          <Grid>
+          <Grid id='beers_grid'>
             <Button 
               basic 
               fluid 
@@ -86,7 +86,7 @@ class Beers extends React.Component {
                   } = beer; 
                   return (
                     <Grid.Column key={id} computer={4} tablet={16} mobile={16}>
-                      <StyledCard>
+                      <StyledCard className='beer_card'>
                         <Card.Content>
                           <Card.Header>
                             { name }
@@ -103,7 +103,7 @@ class Beers extends React.Component {
                           </Card.Meta>
                         </Card.Content>
                         <Card.Content extra>
-                          <Link to={`/beers/${encodeURIComponent(name)}`}>More Info</Link>
+                          <Link to={`/beers/${encodeURIComponent(name)}`} className='more_info_link'>More Info</Link>
                         </Card.Content>
                       </StyledCard>
                       <Divider hidden />
